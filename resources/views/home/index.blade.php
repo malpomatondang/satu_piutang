@@ -69,7 +69,7 @@
             
             <div class="row g-4 mb-4">
                 <div class="col-md-12">
-                    <div class="card card-outline card-success">
+                    <div class="card card-outline card-warning">
                         <div class="card-header">
                             <h3 class="card-title">EARLY WARNING TINDAKAN PENAGIHAN</h3>
                             <div class="card-tools"> <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse"> <i data-lte-icon="expand" class="bi bi-plus-lg"></i> <i data-lte-icon="collapse" class="bi bi-dash-lg"></i> </button> </div> <!-- /.card-tools -->
@@ -173,7 +173,7 @@
             </div> <!--end::Row-->
             <div class="row g-4 mb-4">
                 <div class="col-md-12">
-                    <div class="card card-outline card-success">
+                    <div class="card card-outline card-danger">
                         <div class="card-header">
                             <h3 class="card-title">EARLY ACTION</h3>
                             <div class="card-tools"> <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse"> <i data-lte-icon="expand" class="bi bi-plus-lg"></i> <i data-lte-icon="collapse" class="bi bi-dash-lg"></i> </button> </div> <!-- /.card-tools -->
@@ -212,7 +212,7 @@
 
             <div class="row g-4 mb-4">
                 <div class="col-md-12">
-                    <div class="card card-outline card-success">
+                    <div class="card card-outline card-primary">
                         <div class="card-header">
                             <h3 class="card-title">JOINT COLLECTION</h3>
                             <div class="card-tools"> <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse"> <i data-lte-icon="expand" class="bi bi-plus-lg"></i> <i data-lte-icon="collapse" class="bi bi-dash-lg"></i> </button> </div> <!-- /.card-tools -->
@@ -239,7 +239,7 @@
 
             <div class="row g-4 mb-4">
                 <div class="col-md-12">
-                    <div class="card card-outline card-success">
+                    <div class="card card-outline card-primary">
                         <div class="card-header">
                             <h3 class="card-title">PEMANFAATAN DATA EKSTERNAL</h3>
                             <div class="card-tools"> <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse"> <i data-lte-icon="expand" class="bi bi-plus-lg"></i> <i data-lte-icon="collapse" class="bi bi-dash-lg"></i> </button> </div> <!-- /.card-tools -->
@@ -342,7 +342,7 @@
             </div> <!--end::Row-->
             <div class="row g-4 mb-4">
                 <div class="col-md-12">
-                    <div class="card card-outline card-success">
+                    <div class="card card-outline card-primary">
                         <div class="card-header">
                             <h3 class="card-title">EVALUASI KINERJA PENAGIHAN</h3>
                             <div class="card-tools"> <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse"> <i data-lte-icon="expand" class="bi bi-plus-lg"></i> <i data-lte-icon="collapse" class="bi bi-dash-lg"></i> </button> </div> <!-- /.card-tools -->
@@ -350,6 +350,17 @@
                         <div class="card-body">
                             
             <div class="row"> <!--begin::Col-->
+                <div class="col-lg-3 col-6"> <!--begin::Small Box Widget 1-->
+                    <div class="small-box text-bg-primary">
+                        <div class="inner">
+                            <h3>150</h3>
+                            <p>PREDICTIVE AND PRESCRIPTIVE ANALYSIS</p>
+                        </div> <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            
+                        </svg> <a href="penerimaan-evaluasi" target="_blank" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
+                            More info <i class="bi bi-link-45deg"></i> </a>
+                    </div> <!--end::Small Box Widget 1-->
+                </div> <!--end::Col-->
                 <div class="col-lg-3 col-6"> <!--begin::Small Box Widget 1-->
                     <div class="small-box text-bg-primary">
                         <div class="inner">
