@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="card card-outline card-success">
                         <div class="card-header">
-                            <h3 class="card-title">PIUTANG</h3>
+                            <h3 class="card-title">REKONSILIASI SALDO PIUTANG</h3>
                             <div class="card-tools"> <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse"> <i data-lte-icon="expand" class="bi bi-plus-lg"></i> <i data-lte-icon="collapse" class="bi bi-dash-lg"></i> </button> </div> <!-- /.card-tools -->
                         </div> <!-- /.card-header -->
                         <div class="card-body">
