@@ -16,6 +16,7 @@ Route::get('/generate_no_basp/{nomor}', [HomeController::class, 'generate_no_bas
 
 Route::get('/generate_no_spmp/{nomor}', [HomeController::class, 'generate_no_spmp']);
 Route::get('/generate_no_baps/{nomor}', [HomeController::class, 'generate_no_baps']);
+Route::get('/generate_no_ba_blokir/{nomor}', [HomeController::class, 'generate_no_ba_blokir']);
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('saldo-piutang-bruto', [HomeController::class, 'saldo_piutang_bruto']);

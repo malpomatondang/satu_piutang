@@ -124,22 +124,22 @@
                 <div class="col-lg-3 col-6"> <!--begin::Small Box Widget 2-->
                     <div class="small-box text-bg-warning">
                         <div class="inner">
-                            <h3>53</h3>
-                            <p>TUNGGAKAN LELANG</p>
+                            <h3>{{ number_format($jumlah_tunggakan_non_lelang[0]->jumlah_tunggakan_non_lelang)  }}</h3>
+                            <p>TUNGGAKAN PENJUALAN BARANG SITAAN (NON LELANG)</p>
                         </div> <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             
-                        </svg> <a href="tunggakan-lelang" target="_blank" class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                        </svg> <a href="tunggakan-non-lelang" target="_blank" class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
                             More info <i class="bi bi-link-45deg"></i> </a>
                     </div> <!--end::Small Box Widget 2-->
                 </div> <!--end::Col-->
                 <div class="col-lg-3 col-6"> <!--begin::Small Box Widget 2-->
                     <div class="small-box text-bg-warning">
                         <div class="inner">
-                            <h3>{{ number_format($jumlah_tunggakan_non_lelang[0]->jumlah_tunggakan_non_lelang)  }}</h3>
-                            <p>TUNGGAKAN PENJUALAN BARANG SITAAN (NON LELANG)</p>
+                            <h3>53</h3>
+                            <p>TUNGGAKAN LELANG</p>
                         </div> <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             
-                        </svg> <a href="tunggakan-non-lelang" target="_blank" class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                        </svg> <a href="tunggakan-lelang" target="_blank" class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
                             More info <i class="bi bi-link-45deg"></i> </a>
                     </div> <!--end::Small Box Widget 2-->
                 </div> <!--end::Col-->

@@ -3,13 +3,13 @@
         <div class="container-fluid"> <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">KEMENKUMHAM - Ditjen AHU</h3>
+                    <h3 class="mb-0">KEMENKUMHAM - Ditjen Imigrasi</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            KEMENKUMHAM - Ditjen AHU
+                            KEMENKUMHAM - Ditjen Imigrasi
                         </li>
                     </ol>
                 </div>
@@ -22,37 +22,37 @@
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h3 class="card-title">KEMENKUMHAM - Ditjen AHU</h3>
+                            <h3 class="card-title">KEMENKUMHAM - Ditjen Imigrasi</h3>
                         </div> <!-- /.card-header -->
-                        <div class="card-body">
+                        <div class="card-body table-responsive">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr class="align-middle">
                                         <th style="width: 10px">#</th>
                                         <th class="text-center">NIK/NITKU</th>
-                                        <th class="text-center">Nama</th>
-                                        <th class="text-center">No Akta Pendirian</th>
-                                        <th class="text-center">Tanggal Akta Pendirian</th>
-                                        <th class="text-center">Status Hukum</th>
-                                        <th class="text-center">Nama Pengurus</th>
-                                        <th class="text-center">Jabatan Pengurus</th>
-                                        <th class="text-center">Jumlah Modal Disetor</th>
-                                        <th class="text-center">% Modal Disetor</th>
+                                        <th class="text-center">Nama KTP</th>
+                                        <th class="text-center">Nama Passport</th>
+                                        <th class="text-center">Nomor Passport</th>
+                                        <th class="text-center">Tanggal Lahir</th>
+                                        <th class="text-center">Tujuan Berangkat</th>
+                                        <th class="text-center">Tanggal Berangkat</th>
+                                        <th class="text-center">Tujuan Kembali</th>
+                                        <th class="text-center">Tanggal Kembali</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data_ahu as $ahu)
+                                    @foreach ($data_imigrasi as $imigrasi)
                                     <tr class="align-middle">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $ahu->nik }}</td>
-                                        <td>{{ $ahu->nama }}</td>
-                                        <td>{{ $ahu->no_akta_pendirian_perubahan }}</td>
-                                        <td>{{ $ahu->tanggal_akta_pendirian_perubahan }}</td>
-                                        <td>{{ $ahu->status_hukum }}</td>
-                                        <td>{{ $ahu->nama_pengurus }}</td>
-                                        <td>{{ $ahu->jabatan_pengurus }}</td>
-                                        <td>{{ number_format($ahu->jumlah_modal_disetor) }}</td>
-                                        <td>{{ $ahu->persentase_modal_disetor*100 }}%</td>
+                                        <td>{{ $imigrasi->nik }}</td>
+                                        <td>{{ $imigrasi->nama }}</td>
+                                        <td>{{ $imigrasi->nama_sesuai_passport }}</td>
+                                        <td>{{ $imigrasi->nomor_passport }}</td>
+                                        <td>{{ $imigrasi->tanggal_lahir }}</td>
+                                        <td>{{ $imigrasi->tujuan_keberangkatan }}</td>
+                                        <td>{{ $imigrasi->tanggal_keberangkatan }}</td>
+                                        <td>{{ $imigrasi->tujuan_kembali }}</td>
+                                        <td>{{ $imigrasi->tanggal_kembali }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

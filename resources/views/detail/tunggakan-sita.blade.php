@@ -72,12 +72,12 @@
                                             </td>
                                             <td>
                                                 <ul>
-                                                    <li><a href="polri-eksternal/{{ $sita->nik_nitku }}">Polri</a></li>
-                                                    <li><a href="bpn-eksternal/{{ $sita->nik_nitku }}">BPN</a></li>
-                                                    <li><a href="imigrasi/{{ $sita->nik_nitku }}">Imigrasi</a></li>
-                                                    <li><a href="bei-eksternal/{{ $sita->nik_nitku }}">BEI</a></li>
-                                                    <li><a href="bank-eksternal/{{ $sita->nik_nitku }}">Bank</a></li>
-                                                    <li><a href="pengadilan-niaga-eksternal/{{ $sita->nik_nitku }}">Pengadilan Niaga</a></li>
+                                                    <li><a href="polri-eksternal/{{ $sita->nik_nitku }}" target="_blank">Polri</a></li>
+                                                    <li><a href="bpn-eksternal/{{ $sita->nik_nitku }}" target="_blank">BPN</a></li>
+                                                    <li><a href="imigrasi/{{ $sita->nik_nitku }}" target="_blank">Imigrasi</a></li>
+                                                    <li><a href="bei-eksternal/{{ $sita->nik_nitku }}" target="_blank">BEI</a></li>
+                                                    <li><a href="bank-eksternal/{{ $sita->nik_nitku }}" target="_blank">Bank</a></li>
+                                                    <li><a href="pengadilan-niaga-eksternal/{{ $sita->nik_nitku }}" target="_blank">Pengadilan Niaga</a></li>
                                                 </ul>    
                                             </td>  
                                             {{-- <td>

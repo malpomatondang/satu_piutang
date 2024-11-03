@@ -20,7 +20,7 @@ class HomeController extends Controller
                     skp
                     LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku )  
                 WHERE
-                    penerimaan.nomor_ketetapan IS NULL and skp.nomor_ba_pemberitahuan_sp is null
+                    penerimaan.nomor_ketetapan IS NULL and skp.nomor_surat_teguran is not null and skp.nomor_ba_pemberitahuan_sp is null
         ');
 
         $jumlah_tunggakan_sita = DB::select('
@@ -67,7 +67,7 @@ class HomeController extends Controller
                             LEFT JOIN bank ON skp.nik_nitku = bank.nik 
                         WHERE
                             penerimaan.nomor_ketetapan IS NULL 
-                            AND skp.nomor_ba_blokir IS NOT NULL
+                            AND skp.nomor_surat_permintaan_blokir_bank IS NOT NULL
         ');
 
         $jumlah_data_bank = DB::select('select count(*) jumlah_data_bank from bank'); 
@@ -360,7 +360,7 @@ class HomeController extends Controller
                                 LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku )  
                             WHERE
                                  penerimaan.nomor_ketetapan IS NULL 
-                            AND skp.nomor_surat_paksa IS NOT NULL or skp.nomor_spmp is not null'); 
+                            AND skp.nomor_surat_paksa IS NOT NULL'); 
 
         return view('detail.tunggakan-sita', [
             'tunggakan_sita' => $tunggakan_sita,
@@ -456,14 +456,16 @@ class HomeController extends Controller
 
         $tunggakan_non_lelang = DB::select('
                             SELECT
-                                skp.*, bank.* 
+                                skp.*,
+                                bank.* 
                             FROM
                                 skp
-                                LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang ) and penerimaan.nik_nitku = skp.nik_nitku
-                            left join bank on skp.nik_nitku = bank.nik
+                                LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang ) 
+                                AND penerimaan.nik_nitku = skp.nik_nitku
+                                LEFT JOIN bank ON skp.nik_nitku = bank.nik 
                             WHERE
                                 penerimaan.nomor_ketetapan IS NULL 
-                                AND skp.nomor_ba_blokir IS NOT NULL 
+                                AND skp.nomor_surat_permintaan_blokir_bank IS NOT NULL 
                                 LIMIT 500'); 
 
 
@@ -471,6 +473,19 @@ class HomeController extends Controller
             'tunggakan_non_lelang' => $tunggakan_non_lelang
         ]);
 
+    }
+
+    public function generate_no_ba_blokir(Request $request, $nomor)
+    {
+        
+        DB::update(
+                'UPDATE skp 
+                SET nomor_ba_blokir = concat("BABLOKIR-", LPAD(FLOOR(RAND() * 999999.99), 6, "0"), "/KPP.030504/2024"), tanggal_ba_blokir = now() 
+                WHERE
+                    concat(nik_nitku, REPLACE(nomor_ketetapan, "/", ""), REPLACE(tanggal_ketetapan, "-", "")) = "' . $nomor .'"' 
+        );
+
+        return redirect("/tunggakan-non-lelang")->with('success', 'Nomor berhasil digenerate');;
     }
 
     public function tunggakan_cegah()
@@ -506,10 +521,10 @@ class HomeController extends Controller
             $data_bank = DB::select('select * from bank where nik = "' . $nik . '"');
 
             // Return a view and pass the user data
-            return view('detail.bank-eksternal', compact('data_bank', 'nik'));
+            return view('data_eksternal.bank-eksternal', compact('data_bank', 'nik'));
         } else{
             $data_bank = DB::select('select * from bank where nik');
-            return view('detail.bank-eksternal', compact('data_bank', 'nik'));
+            return view('data_eksternal.bank-eksternal', compact('data_bank', 'nik'));
         }
     }
 
@@ -521,10 +536,10 @@ class HomeController extends Controller
             $data_pengadilan_niaga = DB::select('select * from pengadilan_niaga where nik_nitku = "' . $nik . '"');
 
             // Return a view and pass the user data
-            return view('detail.pengadilan-niaga-eksternal', compact('data_pengadilan_niaga', 'nik'));
+            return view('data_eksternal.pengadilan-niaga-eksternal', compact('data_pengadilan_niaga', 'nik'));
         } else{
             $data_pengadilan_niaga = DB::select('select * from pengadilan_niaga where nik_nitku');
-            return view('detail.pengadilan-niaga-eksternal', compact('data_pengadilan_niaga', 'nik'));
+            return view('data_eksternal.pengadilan-niaga-eksternal', compact('data_pengadilan_niaga', 'nik'));
         }
     }
 
@@ -535,24 +550,24 @@ class HomeController extends Controller
             $data_imigrasi = DB::select('select * from imigrasi where nik = "' . $nik . '"');
 
             // Return a view and pass the user data
-            return view('detail.imigrasi', compact('data_imigrasi', 'nik'));
+            return view('data_eksternal.imigrasi', compact('data_imigrasi', 'nik'));
         } else{
             $data_imigrasi = DB::select('select * from imigrasi where nik');
-            return view('detail.imigrasi', compact('data_imigrasi', 'nik'));
+            return view('data_eksternal.imigrasi', compact('data_imigrasi', 'nik'));
         }
     }
 
     public function ahu_eksternal()
     {
         $data_ahu = DB::select('select * from ahu');
-        return view('detail.ahu-eksternal', compact('data_ahu'));
+        return view('data_eksternal.ahu-eksternal', compact('data_ahu'));
     }
 
     public function bc()
     {
         $data_bc_peb = DB::select('select * from bc_peb');
         $data_bc_pib = DB::select('select * from bc_pib');
-        return view('detail.bc', compact('data_bc_peb', 'data_bc_pib'));
+        return view('data_eksternal.bc', compact('data_bc_peb', 'data_bc_pib'));
     }
 
     public function polri_eksternal($nik = null)
@@ -562,10 +577,10 @@ class HomeController extends Controller
             $data_polri = DB::select('select * from polri where nik = "' . $nik . '"');
 
             // Return a view and pass the user data
-            return view('detail.polri-eksternal', compact('data_polri', 'nik'));
+            return view('data_eksternal.polri-eksternal', compact('data_polri', 'nik'));
         } else{
             $data_polri = DB::select('select * from polri where nik');
-            return view('detail.polri-eksternal', compact('data_polri', 'nik'));
+            return view('data_eksternal.polri-eksternal', compact('data_polri', 'nik'));
         }
     }
 
@@ -577,10 +592,10 @@ class HomeController extends Controller
             $data_bpn = DB::select('select * from bpn where nik = "' . $nik . '"');
 
             // Return a view and pass the user data
-            return view('detail.bpn-eksternal', compact('data_bpn', 'nik'));
+            return view('data_eksternal.bpn-eksternal', compact('data_bpn', 'nik'));
         } else{
             $data_bpn = DB::select('select * from bpn where nik');
-            return view('detail.bpn-eksternal', compact('data_bpn', 'nik'));
+            return view('data_eksternal.bpn-eksternal', compact('data_bpn', 'nik'));
         }
     }
 
@@ -592,31 +607,31 @@ class HomeController extends Controller
             $data_bei = DB::select('select * from bursa_efek_indonesia where nik = "' . $nik . '"');
 
             // Return a view and pass the user data
-            return view('detail.bei-eksternal', compact('data_bei', 'nik'));
+            return view('data_eksternal.bei-eksternal', compact('data_bei', 'nik'));
         } else{
             $data_bei = DB::select('select * from bursa_efek_indonesia where nik');
-            return view('detail.bei-eksternal', compact('data_bei', 'nik'));
+            return view('data_eksternal.bei-eksternal', compact('data_bei', 'nik'));
         }
     }
 
     public function penerimaan_evaluasi()
     {
-        return view('detail.penerimaan-evaluasi');
+        return view('data_eksternal.penerimaan-evaluasi');
     }
 
     public function tindakan_penagihan()
     {
-        return view('detail.tindakan-penagihan');
+        return view('data_eksternal.tindakan-penagihan');
     }
 
     public function manajemen_waktu()
     {
-        return view('detail.manajemen-waktu');
+        return view('data_eksternal.manajemen-waktu');
     }
 
     public function manajemen_barang_sitaan()
     {
-        return view('detail.manajemen-barang-sitaan');
+        return view('data_eksternal.manajemen-barang-sitaan');
     }
 
 }

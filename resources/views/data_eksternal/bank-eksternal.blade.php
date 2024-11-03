@@ -3,14 +3,13 @@
         <div class="container-fluid"> <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    
-                        <h3 class="mb-0">Data Kepemilikan Motor</h3>
+                    <h3 class="mb-0">Bank</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Data Kepemilikan Motor
+                            Bank
                         </li>
                     </ol>
                 </div>
@@ -23,39 +22,35 @@
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h3 class="card-title">Data Kepemilikan Motor</h3>
+                            <h3 class="card-title">Bank</h3>
                         </div> <!-- /.card-header -->
-                        <div class="card-body">
+                        <div class="card-body table-responsive">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr class="align-middle">
                                         <th style="width: 10px">#</th>
-                                        <th class="text-center">NIK/NITKU</th>
-                                        <th class="text-center">Nama Pemilik</th>
-                                        <th class="text-center">Alamat</th>
-                                        <th class="text-center">Tanggal Lahir</th>
-                                        <th class="text-center">Nomor Polisi</th>
-                                        <th class="text-center">Nomor Rangka</th>
-                                        <th class="text-center">Tahun Pembuatan</th>
-                                        <th class="text-center">Nama Jenis Kendaraan</th>
-                                        <th class="text-center">Merk Kendaraan</th>
-                                        <th class="text-center">Type Kendaraan</th>
+                                        <th class="text-center">NIK</th>
+                                        <th class="text-center">Nama</th>
+                                        <th class="text-center">Nama di Bank</th>
+                                        <th class="text-center">Bank Terdaftar</th>
+                                        <th class="text-center">Nomor Rekening</th>
+                                        <th class="text-center">Mata Uang</th>
+                                        <th class="text-center">Jumlah Uang</th>
+                                        <th class="text-center">Jumlah Hutang</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data_polri as $polri)
+                                    @foreach ($data_bank as $bank)
                                     <tr class="align-middle">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $polri->nik }}</td>
-                                        <td>{{ $polri->nama_pemilik }}</td>
-                                        <td>{{ $polri->alamat }}</td>
-                                        <td>{{ $polri->tanggal_lahir }}</td>
-                                        <td>{{ $polri->nopol }}</td>
-                                        <td>{{ $polri->no_rangka }}</td>
-                                        <td>{{ $polri->tahun_pembuatan }}</td>
-                                        <td>{{ $polri->nama_jenis }}</td>
-                                        <td>{{ $polri->merk_kendaraan }}</td>
-                                        <td>{{ $polri->type_kendaraan }}</td>
+                                        <td>{{ $bank->nik }}</td>
+                                        <td>{{ $bank->nama }}</td>
+                                        <td>{{ $bank->nama_di_bank }}</td>
+                                        <td>{{ $bank->nama_bank_terdaftar }}</td>
+                                        <td>{{ $bank->nomor_rekening }}</td>
+                                        <td>{{ $bank->mata_uang }}</td>
+                                        <td>{{ number_format($bank->jumlah_uang) }}</td>
+                                        <td>{{ number_format($bank->jumlah_utang) }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

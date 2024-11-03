@@ -32,8 +32,8 @@
                                         <th class="text-center">Unit Kerja</th>
                                         <th class="text-center">NIK/NITKU</th>
                                         <th class="text-center">Nama</th>
-                                        {{-- <th class="text-center">Nomor Surat Permintaan Blokir</th>
-                                        <th class="text-center">Tanggal Surat Permintaan Blokir</th> --}}
+                                        <th class="text-center">Nomor Surat Permintaan Blokir</th>
+                                        <th class="text-center">Tanggal Surat Permintaan Blokir</th>
                                         <th class="text-center">Nomor BA Blokir Bank</th>
                                         <th class="text-center">Tanggal BA Blokir Bank</th>
                                         <th class="text-center">Jangka Waktu Blokir Bank</th>
@@ -59,10 +59,22 @@
                                         <td>{{ $non_lelang->unit_kerja }}</td>
                                         <td>{{ $non_lelang->nik_nitku }}</td>
                                         <td>{{ $non_lelang->nama }}</td>
-                                        {{-- <td>nomor auto</td>
-                                        <td>tanggal auto</td> --}}
-                                        <td>{{ $non_lelang->nomor_ba_blokir }}</td>
-                                        <td>{{ $non_lelang->tanggal_ba_blokir }}</td>
+                                        <td>{{ $non_lelang->nomor_surat_permintaan_blokir_bank }}</td>
+                                        <td>{{ $non_lelang->tanggal_surat_permintaan_blokir_bank }}</td>
+                                        <td>
+                                            @if ($non_lelang->nomor_ba_blokir)
+                                            {{ $non_lelang->nomor_ba_blokir }} 
+                                            @else
+                                            <a href="generate_no_ba_blokir/{{ $non_lelang->nik_nitku }}{{ str_replace("/", "", $non_lelang->nomor_ketetapan) }}{{ str_replace("-", "", $non_lelang->tanggal_ketetapan) }}"><button type="button" class="btn btn-outline-primary mb-2">Generate No BA Blokir Bank</button></a>  
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($non_lelang->tanggal_ba_blokir)
+                                            {{ $non_lelang->tanggal_ba_blokir }} 
+                                            @else
+                                             
+                                            @endif
+                                        </td>
                                         <td>Jangka waktu blokir</td>
                                         <td>{{ $non_lelang->nomor_baps }}</td>
                                         <td>{{ $non_lelang->tanggal_baps }}</td>

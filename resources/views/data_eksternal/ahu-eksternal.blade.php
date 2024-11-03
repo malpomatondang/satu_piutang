@@ -3,13 +3,13 @@
         <div class="container-fluid"> <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Badan Pertanahan Nasional</h3>
+                    <h3 class="mb-0">KEMENKUMHAM - Ditjen AHU</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            BPN
+                            KEMENKUMHAM - Ditjen AHU
                         </li>
                     </ol>
                 </div>
@@ -22,39 +22,37 @@
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h3 class="card-title">Badan Pertanahan Nasional</h3>
+                            <h3 class="card-title">KEMENKUMHAM - Ditjen AHU</h3>
                         </div> <!-- /.card-header -->
-                        <div class="card-body">
+                        <div class="card-body table-responsive">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr class="align-middle">
                                         <th style="width: 10px">#</th>
                                         <th class="text-center">NIK/NITKU</th>
-                                        <th class="text-center">Nama KTP</th>
-                                        <th class="text-center">Tanggal lahir</th>
-                                        <th class="text-center">Nomor Kepemilikan</th>
-                                        <th class="text-center">Luas</th>
-                                        <th class="text-center">Alamat Kepemilikan</th>
-                                        <th class="text-center">Desa/Kelurahan</th>
-                                        <th class="text-center">Kecamatan</th>
-                                        <th class="text-center">Kota</th>
-                                        <th class="text-center">Provinsi</th>
+                                        <th class="text-center">Nama</th>
+                                        <th class="text-center">No Akta Pendirian</th>
+                                        <th class="text-center">Tanggal Akta Pendirian</th>
+                                        <th class="text-center">Status Hukum</th>
+                                        <th class="text-center">Nama Pengurus</th>
+                                        <th class="text-center">Jabatan Pengurus</th>
+                                        <th class="text-center">Jumlah Modal Disetor</th>
+                                        <th class="text-center">% Modal Disetor</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data_bpn as $bpn)
+                                    @foreach ($data_ahu as $ahu)
                                     <tr class="align-middle">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $bpn->nik }}</td>
-                                        <td>{{ $bpn->nama }}</td>
-                                        <td>{{ $bpn->tanggal_lahir }}</td>
-                                        <td>{{ $bpn->nomor_kepemilikan }}</td>
-                                        <td>{{ $bpn->luas_tanah }}</td>
-                                        <td>{{ $bpn->alamat }}</td>
-                                        <td>{{ $bpn->desa_kelurahan }}</td>
-                                        <td>{{ $bpn->kecamatan }}</td>
-                                        <td>{{ $bpn->kota }}</td>
-                                        <td>{{ $bpn->provinsi }}</td>
+                                        <td>{{ $ahu->nik }}</td>
+                                        <td>{{ $ahu->nama }}</td>
+                                        <td>{{ $ahu->no_akta_pendirian_perubahan }}</td>
+                                        <td>{{ $ahu->tanggal_akta_pendirian_perubahan }}</td>
+                                        <td>{{ $ahu->status_hukum }}</td>
+                                        <td>{{ $ahu->nama_pengurus }}</td>
+                                        <td>{{ $ahu->jabatan_pengurus }}</td>
+                                        <td>{{ number_format($ahu->jumlah_modal_disetor) }}</td>
+                                        <td>{{ $ahu->persentase_modal_disetor*100 }}%</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
