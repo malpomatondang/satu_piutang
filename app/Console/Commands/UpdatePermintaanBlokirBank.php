@@ -45,8 +45,7 @@ class UpdatePermintaanBlokirBank extends Command
                 tanggal_surat_permintaan_blokir_bank = NOW() 
                 WHERE
                     nomor_ba_blokir IS NULL 
-                    AND nomor_spmp IS NOT NULL 
-                    AND nomor_baps IS NOT NULL
+                    AND nomor_spmp IS NOT NULL
         ');
         // Atau bisa menggunakan logic lain, seperti:
         // YourModel::create([...]) untuk menambah data baru

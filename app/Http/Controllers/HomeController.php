@@ -20,7 +20,7 @@ class HomeController extends Controller
                     skp
                     LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku )  
                 WHERE
-                    penerimaan.nomor_ketetapan IS NULL and skp.nomor_surat_teguran is not null and skp.nomor_ba_pemberitahuan_sp is null
+                    penerimaan.nomor_ketetapan IS NULL and skp.nomor_surat_teguran is not null and skp.nomor_ba_pemberitahuan_sp is null limit 100
         ');
 
         $jumlah_tunggakan_sita = DB::select('
@@ -308,7 +308,7 @@ class HomeController extends Controller
                                 skp
                                 LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku ) 
                             WHERE
-                                penerimaan.nomor_ketetapan IS NULL and skp.nomor_surat_teguran is not null'); 
+                                penerimaan.nomor_ketetapan IS NULL and skp.nomor_surat_teguran is not null limit 100'); 
 
         return view('detail.tunggakan-paksa', [
             'tunggakan_paksa' => $tunggakan_paksa,
@@ -360,7 +360,7 @@ class HomeController extends Controller
                                 LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku )  
                             WHERE
                                  penerimaan.nomor_ketetapan IS NULL 
-                            AND skp.nomor_surat_paksa IS NOT NULL'); 
+                            AND skp.nomor_surat_paksa IS NOT NULL limit 100'); 
 
         return view('detail.tunggakan-sita', [
             'tunggakan_sita' => $tunggakan_sita,
@@ -412,7 +412,7 @@ class HomeController extends Controller
                             WHERE
                                 penerimaan.nomor_ketetapan IS NULL 
                                 AND skp.nomor_spmp IS NOT NULL 
-                                LIMIT 500'); 
+                                LIMIT 100'); 
 
 
         return view('detail.tunggakan-blokir', [
@@ -432,7 +432,7 @@ class HomeController extends Controller
                             WHERE
                                 penerimaan.nomor_ketetapan IS NULL 
                                 AND skp.nomor_spmp IS NOT NULL 
-                                LIMIT 500'); 
+                                LIMIT 100'); 
 
 
         return view('detail.tunggakan-baps', [
@@ -466,7 +466,7 @@ class HomeController extends Controller
                             WHERE
                                 penerimaan.nomor_ketetapan IS NULL 
                                 AND skp.nomor_surat_permintaan_blokir_bank IS NOT NULL 
-                                LIMIT 500'); 
+                                LIMIT 100'); 
 
 
         return view('detail.tunggakan-non-lelang', [
