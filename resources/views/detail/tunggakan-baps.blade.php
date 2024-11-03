@@ -24,7 +24,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Tunggakan BAPS</h3>
                         </div> <!-- /.card-header -->
-                        <div class="card-body">
+                        <div class="card-body table-responsive">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr class="align-middle">

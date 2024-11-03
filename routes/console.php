@@ -11,3 +11,4 @@ use Illuminate\Support\Facades\Schedule;
 
 // Schedule::command('update-surat-teguran')->everyMinute();
 Schedule::command('update-surat-teguran')->daily();
+Schedule::command('update-blokir-bank')->daily();

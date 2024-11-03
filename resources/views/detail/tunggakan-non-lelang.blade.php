@@ -24,7 +24,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Tunggakan Non Lelang</h3>
                         </div> <!-- /.card-header -->
-                        <div class="card-body">
+                        <div class="card-body table-responsive">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr class="align-middle">
@@ -32,27 +32,24 @@
                                         <th class="text-center">Unit Kerja</th>
                                         <th class="text-center">NIK/NITKU</th>
                                         <th class="text-center">Nama</th>
-                                        <th class="text-center">Nomor Surat Permintaan Blokir</th>
-                                        <th class="text-center">Tanggal Surat Permintaan Blokir</th>
+                                        {{-- <th class="text-center">Nomor Surat Permintaan Blokir</th>
+                                        <th class="text-center">Tanggal Surat Permintaan Blokir</th> --}}
                                         <th class="text-center">Nomor BA Blokir Bank</th>
                                         <th class="text-center">Tanggal BA Blokir Bank</th>
                                         <th class="text-center">Jangka Waktu Blokir Bank</th>
                                         <th class="text-center">Nomor BAPS</th>
                                         <th class="text-center">Tanggal BAPS</th>
                                         <th class="text-center">Status Aset</th>
-                                        <th class="text-center">Jumlah Ketetapan</th>
                                         <th class="text-center">Nilai Ketetapan</th>
                                         <th class="text-center">Jenis Aset</th>
                                         <th class="text-center">Sumber Data</th>
                                         <th class="text-center">Lokasi Aset</th>
                                         <th class="text-center">ID Aset</th>
                                         <th class="text-center">Nilai Aset</th>
-                                        <th class="text-center">Tgl Update Nilai Aset</th>
                                         <th class="text-center">No. Surat PBK</th>
                                         <th class="text-center">Tanggal Surat PBK</th>
                                         <th class="text-center">NIP</th>
                                         <th class="text-center">Juru Sita</th>
-                                        <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,34 +59,24 @@
                                         <td>{{ $non_lelang->unit_kerja }}</td>
                                         <td>{{ $non_lelang->nik_nitku }}</td>
                                         <td>{{ $non_lelang->nama }}</td>
-                                        <td>765746</td>
-                                        <td>2-11-2024</td>
+                                        {{-- <td>nomor auto</td>
+                                        <td>tanggal auto</td> --}}
                                         <td>{{ $non_lelang->nomor_ba_blokir }}</td>
                                         <td>{{ $non_lelang->tanggal_ba_blokir }}</td>
-                                        <td>{{ $non_lelang->tanggal_ba_blokir }}</td>
+                                        <td>Jangka waktu blokir</td>
+                                        <td>{{ $non_lelang->nomor_baps }}</td>
+                                        <td>{{ $non_lelang->tanggal_baps }}</td>
+                                        <td>status aset</td>
                                         <td class="text-center">{{ number_format($non_lelang->nilai_ketetapan) }}</td>
+                                        <td>Keuangan</td>
+                                        <td>{{ $non_lelang->nama_bank_terdaftar }}</td>
+                                        <td>{{ $non_lelang->kantor_cabang_bank }}</td>
+                                        <td>{{ $non_lelang->nomor_rekening }}</td>
+                                        <td class="text-center">{{ number_format($non_lelang->jumlah_uang) }}</td>
+                                        <td>nomor pbk</td>
+                                        <td>tanggal pbk</td>
                                         <td>{{ $non_lelang->nip }}</td>
-                                        <td>{{ $non_lelang->juru_sita }}</td>          
-                                        <td><a href="download-word-non_lelang"><button type="button" class="btn btn-outline-primary mb-2">Buat non_lelang</button></a></td>  
-                                        
-                                        <td class="text-center">
-                                            <select class="form-select" id="validationCustom04" required>
-                                                <option value="">Pilih Jenis Aset..</option>
-                                                <option value="Tidak ada Aset Sitaan">Tidak ada Aset Sitaan</option>
-                                                <option value="Tanah dan/atau Bangunan termasuk Apartemen, Rumah Susun">Tanah dan/atau Bangunan termasuk Apartemen, Rumah Susun</option>
-                                                <option value="Logam Mulia dengan sertifikat">Logam Mulia dengan sertifikat</option>
-                                                <option value="Emas bukan logam mulia (tanpa sertifikat) termasuk perhiasan yang terbuat dari Emas">Emas bukan logam mulia (tanpa sertifikat) termasuk perhiasan yang terbuat dari Emas</option>
-                                            </select>
-                                        </td>
-                                        <td class="text-center">
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                        </td>
-                                        <td class="text-center">
-                                            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                        </td>
-                                        <td class="text-center">
-                                            <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                        </td>
+                                        <td>{{ $non_lelang->juru_sita }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

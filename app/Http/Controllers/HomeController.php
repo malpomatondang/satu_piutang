@@ -277,12 +277,12 @@ class HomeController extends Controller
 
         $tunggakan_paksa = DB::select('
                             SELECT
-                                skp.*
+                                skp.* 
                             FROM
                                 skp
-                                left join penerimaan on 
-                                concat(skp.nomor_ketetapan, skp.saldo_piutang) = CONCAT(penerimaan.nomor_ketetapan, penerimaan.saldo_piutang)
-                                where penerimaan.nomor_ketetapan is null limit 500'); 
+                                LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku ) 
+                            WHERE
+                                penerimaan.nomor_ketetapan IS NULL and skp.nomor_surat_teguran is not null'); 
 
         return view('detail.tunggakan-paksa', [
             'tunggakan_paksa' => $tunggakan_paksa,
@@ -331,10 +331,10 @@ class HomeController extends Controller
                                 skp.* 
                             FROM
                                 skp
-                                LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang ) 
+                                LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku )  
                             WHERE
                                 penerimaan.nomor_ketetapan IS NULL and skp.nomor_surat_paksa is not null
-                                LIMIT 500'); 
+	                        AND skp.nomor_surat_paksa IS NOT NULL'); 
 
         return view('detail.tunggakan-sita', [
             'tunggakan_sita' => $tunggakan_sita,
@@ -381,8 +381,8 @@ class HomeController extends Controller
                                 skp.*, bank.* 
                             FROM
                                 skp
-                                LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang )
-                            left join bank on skp.nik_nitku = bank.nik
+                                LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku )
+                            join bank on skp.nik_nitku = bank.nik
                             WHERE
                                 penerimaan.nomor_ketetapan IS NULL 
                                 AND skp.nomor_spmp IS NOT NULL 
@@ -402,7 +402,7 @@ class HomeController extends Controller
                                 skp.* 
                             FROM
                                 skp
-                                LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang ) 
+                                LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku ) 
                             WHERE
                                 penerimaan.nomor_ketetapan IS NULL 
                                 AND skp.nomor_spmp IS NOT NULL 
@@ -433,7 +433,7 @@ class HomeController extends Controller
                                 skp.*, bank.* 
                             FROM
                                 skp
-                                LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang )
+                                LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang ) and penerimaan.nik_nitku = skp.nik_nitku
                             left join bank on skp.nik_nitku = bank.nik
                             WHERE
                                 penerimaan.nomor_ketetapan IS NULL 
