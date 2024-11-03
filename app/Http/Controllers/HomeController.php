@@ -18,7 +18,7 @@ class HomeController extends Controller
                     count(*) as jumlah_tunggakan_paksa
                 FROM
                     skp
-                    LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang ) 
+                    LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku )  
                 WHERE
                     penerimaan.nomor_ketetapan IS NULL and skp.nomor_ba_pemberitahuan_sp is null
         ');
@@ -28,7 +28,7 @@ class HomeController extends Controller
                             count(*) jumlah_tunggakan_sita 
                         FROM
                             skp
-                            LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang ) 
+                            LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku ) 
                         WHERE
                             penerimaan.nomor_ketetapan IS NULL 
                             AND skp.nomor_surat_paksa IS NOT NULL and skp.nomor_spmp is null
@@ -36,14 +36,38 @@ class HomeController extends Controller
 
         $jumlah_tunggakan_blokir = DB::select('
                         SELECT
-                        count(*) jumlah_tunggakan_blokir
-                    FROM
-                        skp
-                        LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang )
-                        LEFT JOIN bank ON skp.nik_nitku = bank.nik 
-                    WHERE
-                        penerimaan.nomor_ketetapan IS NULL 
-                        AND skp.nomor_spmp IS NOT NULL 
+                            count(*) as jumlah_tunggakan_blokir 
+                        FROM
+                            skp
+                            LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku )
+                            JOIN bank ON skp.nik_nitku = bank.nik 
+                        WHERE
+                            penerimaan.nomor_ketetapan IS NULL 
+                            AND skp.nomor_spmp IS NOT NULL
+        ');
+
+        $jumlah_tunggakan_baps = DB::select('
+                        SELECT
+                            count(*) as jumlah_tunggakan_baps 
+                        FROM
+                            skp
+                            LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku ) 
+                        WHERE
+                            penerimaan.nomor_ketetapan IS NULL 
+                            AND skp.nomor_spmp IS NOT NULL and skp.nomor_baps is null  
+        ');
+
+        $jumlah_tunggakan_non_lelang = DB::select('
+                        SELECT
+                            count(*) as jumlah_tunggakan_non_lelang 
+                        FROM
+                            skp
+                            LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang ) 
+                            AND penerimaan.nik_nitku = skp.nik_nitku
+                            LEFT JOIN bank ON skp.nik_nitku = bank.nik 
+                        WHERE
+                            penerimaan.nomor_ketetapan IS NULL 
+                            AND skp.nomor_ba_blokir IS NOT NULL
         ');
 
         $jumlah_data_bank = DB::select('select count(*) jumlah_data_bank from bank'); 
@@ -61,7 +85,9 @@ class HomeController extends Controller
             'penyisihan_piutang' => $penyisihan_piutang,
             'jumlah_tunggakan_paksa' => $jumlah_tunggakan_paksa,
             'jumlah_tunggakan_sita' => $jumlah_tunggakan_sita,
+            'jumlah_tunggakan_baps' => $jumlah_tunggakan_baps,
             'jumlah_tunggakan_blokir' => $jumlah_tunggakan_blokir,
+            'jumlah_tunggakan_non_lelang' => $jumlah_tunggakan_non_lelang,
             'jumlah_data_bank' => $jumlah_data_bank,
             'jumlah_data_pengadilan_niaga' => $jumlah_data_pengadilan_niaga,
             'jumlah_data_imigrasi' => $jumlah_data_imigrasi,
@@ -333,8 +359,8 @@ class HomeController extends Controller
                                 skp
                                 LEFT JOIN penerimaan ON concat( skp.nomor_ketetapan, skp.saldo_piutang, skp.nik_nitku ) = CONCAT( penerimaan.nomor_ketetapan, penerimaan.saldo_piutang, penerimaan.nik_nitku )  
                             WHERE
-                                penerimaan.nomor_ketetapan IS NULL and skp.nomor_surat_paksa is not null
-	                        AND skp.nomor_surat_paksa IS NOT NULL'); 
+                                 penerimaan.nomor_ketetapan IS NULL 
+                            AND skp.nomor_surat_paksa IS NOT NULL or skp.nomor_spmp is not null'); 
 
         return view('detail.tunggakan-sita', [
             'tunggakan_sita' => $tunggakan_sita,
